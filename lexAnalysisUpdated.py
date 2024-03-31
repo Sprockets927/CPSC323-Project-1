@@ -12,7 +12,11 @@ def tokenize_code(file_name):
             tokens = re.findall(r'"[^"]*"|\b\d+(?:\.\d+)?\b|\w+|\(|\)|\+=|==|-=|\*=|/=|%=|//=|\**=|&=|\|=|\^=|>>=|<<=|!=|>=|<=|[-.,!?;:`^~|@&#{}()+<>*%/\]\[]+|(?<!=)=|:', line)
 
             for token in tokens:
-                if token in ('def', 'return', 'if', 'elif', 'else', 'print', 'and', 'or', 'not', 'is', 'is not', 'in', 'in not'):
+                if token in ('def', 'return', 'if', 'elif', 'else', 'print', 'and', 'or', 'not', 'is', 'in'
+                             'False', 'await','import', 'pass', 'None', 'break', 'except', 'raise',
+                             'True', 'class', 'finally', 'continue', 'for', 'lambda', 'try',
+                             'as', 'from', 'nonlocal', 'while', 'assert', 'del', 'global',
+                             'with', 'async', 'yield'):
                     token_type = 'Keywords'
                 elif re.match(r'[a-zA-Z_][a-zA-Z0-9_]*', token):
                     token_type = 'Identifiers'
