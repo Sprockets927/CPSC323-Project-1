@@ -9,10 +9,10 @@ def tokenize_code(file_name):
             lines = file.readlines()
 
         for line_number, line in enumerate(lines, start=1):
-            tokens = re.findall(r'"[^"]*"|\b\d+(?:\.\d+)?\b|\w+|\(|\)|[-.,!?;()+<>*%/]+|(?<!=)==|=|:', line)
+            tokens = re.findall(r'"[^"]*"|\b\d+(?:\.\d+)?\b|\w+|\(|\)|\+=|==|-=|\*=|/=|%=|//=|\**=|&=|\|=|\^=|>>=|<<=|!=|>=|<=|[-.,!?;:`^~|@&#{}()+<>*%/\]\[]+|(?<!=)=|:', line)
 
             for token in tokens:
-                if token in ('def', 'return', 'if', 'elif', 'else', 'print'):
+                if token in ('def', 'return', 'if', 'elif', 'else', 'print', 'and', 'or', 'not', 'is', 'is not', 'in', 'in not'):
                     token_type = 'Keywords'
                 elif re.match(r'[a-zA-Z_][a-zA-Z0-9_]*', token):
                     token_type = 'Identifiers'
@@ -20,9 +20,11 @@ def tokenize_code(file_name):
                     token_type = 'Literals'
                 elif re.match(r'\d+', token):
                     token_type = 'Literals'
-                elif token in ('+', '-', '*', '/', '=', '==', '<', '>', '**', '%', '++', '--'):
+                elif token in ('+', '-', '*', '/', '=', '==', '<', '>', '**', '%', '++',
+                               '--', '//', '+=', '-=', '*=', '/=', '%=', '//=', '**=', '&=',
+                               '|=', '^=', '>>=', '<<=', '!=', '>=', '<=', '&', '|', '^', '<<', '>>', '~'):
                     token_type = 'Operators'
-                elif token in ('(', ')', ':', ',', '"', '.'):
+                elif token in ('(', ')', ':', ',', '"', '.', '[', ']', '{', '}', '`', ';', "'", '@', '#'):
                     token_type = 'Separators'
                 else:
                     token_type = 'Other'
@@ -40,6 +42,6 @@ token_list, lexeme_count = tokenize_code('testCode.txt')
 
 # Print lexemes with types
 for lexeme, lexeme_type in token_list:
-    print(f"Lexeme: {lexeme}, Type: {lexeme_type}")
+    print(f"Lexeme: {lexeme} Type: {lexeme_type}")
 
 print("Lexeme count:", lexeme_count)
