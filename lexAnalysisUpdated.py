@@ -13,7 +13,7 @@ def tokenize_code(file_name):
 
             for token in tokens:
                 if token in ('def', 'return', 'if', 'elif', 'else', 'print', 'and', 'or', 'not', 'is', 'in'
-                             'False', 'await','import', 'pass', 'None', 'break', 'except', 'raise',
+                             'False', 'await', 'import', 'pass', 'None', 'break', 'except', 'raise',
                              'True', 'class', 'finally', 'continue', 'for', 'lambda', 'try',
                              'as', 'from', 'nonlocal', 'while', 'assert', 'del', 'global',
                              'with', 'async', 'yield'):
